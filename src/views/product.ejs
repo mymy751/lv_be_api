@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <!-- cái đường dẫn css nó đã tự tìm tới .src/public rồi
+    ta đã set nó ở file index.js -->
+      
+</head>
+<body>
+
+    <%- include('dashboarch.ejs')%>
+      
+    <div class="content">
+
+        <form action="/add-product" method="get">
+            <button style="margin: 6px; cursor: pointer; border-radius: 4px;" type="submit" class="btn btn-add">
+                <h2 style="padding: 6px;">Add Product</h2>
+            </button>
+        </form>
+
+        <div style="height: 10px;"></div>
+
+        <table>
+            <tr>
+                <td>STT</td>
+                <td>Product_name</td>
+                <td>Product_Price</td>
+                <td>Image</td>
+                <td>Status</td>
+                <td>Action</td>
+            </tr>
+            <% for(var i=0; i<data.length; i++) { %>
+                <tr>
+                    <td><%= data[i]['id_product'] %></td>
+                    <td><%= data[i]['product_name'] %></td>
+                    <td><%= data[i]['product_price'] %></td>
+                    <td><img src="<%= data[i]['product_image'] %>" style="width: 100px; height: 80px;"></td>
+                    <td><%= data[i]['status_product'] %></td>
+                    <td>
+                        <button class="btn-delete" data-productid="<%= data[i]['id_product'] %>">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="btn-update" 
+                            data-productid="<%= data[i]['id_product'] %>" 
+                            data-productname="<%= data[i]['product_name'] %>"
+                            data-productimage="<%= data[i]['product_image'] %>"
+                            data-productprice="<%= data[i]['product_price'] %>"
+                            data-productstatus="<%= data[i]['status_product'] %>">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+
+    
+</body>
+<script>
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function() {
+
+            const productId = this.dataset.productid;
+
+            // Gửi yêu cầu xóa sản phẩm
+            fetch('/delete-product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                // body: JSON.stringify({ productId }),
+                body: JSON.stringify({ productId: productId }),
+
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message); // Hiển thị thông báo
+                window.location.reload(); // Tải lại trang sau khi xóa thành công
+            })
+            .catch(error => console.error('Lỗi:', error));
+        });
+    });
+</script>
+
+<script>
+    document.querySelectorAll('.btn-update').forEach(button => {
+        button.addEventListener('click', function(){
+
+        const productId = this.dataset.productid;
+        const productName = this.dataset.productname;
+        const productImage = this.dataset.productimage;
+        const productPrice = this.dataset.productprice;
+        const productStatus = this.dataset.productstatus;
+
+        window.location.href = '/update-product?productId='+ productId + '&productName='+ productName + '&productImage='+ productImage + '&productPrice='+ productPrice + '&productStatus=' + productStatus;
+       
+    });
+});
+</script>
+</html>

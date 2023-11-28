@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Product</title>
+
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+</head>
+<body>
+
+    <%- include('dashboarch.ejs') %>
+
+    <div class="content">
+        <form action="/add-category" method="get">
+            <button style="margin: 6px 0; cursor: pointer; border-radius: 4px; " type="submit">
+                <h2>Add Category</h2>
+            </button>
+        </form>
+    
+        <div style="height: 10px;"></div>
+
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>Category Name</td>
+                <td>Action</td>
+            </tr>
+            <% for(var i=0; i<data.length; i++){ %>
+                <tr>
+                    <td><%= data[i]['id_category'] %></td>
+                    <td><%= data[i]['category_name'] %></td>
+                    <td>
+                        <button class="btn-delete" data-categoryid="<%= data[i]['id_category'] %>">Delete</button>
+                        <button class="btn-update" 
+                            data-categoryid="<%= data[i]['id_category'] %>"
+                            data-categoryname="<%= data[i]['category_name'] %>">Update
+                        </button>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+</body>
+<script>
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        button.addEventListener('click', function(){
+            const categoryId = this.dataset.categoryid;
+
+            fetch('/delete-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({categoryId: categoryId}),
+            })
+            .then(response => response.text())
+            .then(message =>{
+                alert(message);
+                window.location.reload();
+            })
+            .catch(error => console.error('Lỗi', error));
+        })
+    })
+</script>
+<script>
+    document.querySelectorAll('.btn-update').forEach(button => {
+        button.addEventListener('click', function(){
+
+            const categoryId = this.dataset.categoryid;
+            const categoryName = this.dataset.categoryname;
+
+            window.location.href = '/update-category?categoryId='+categoryId+'&categoryName='+categoryName;
+
+        });
+    })
+</script>
+</html>

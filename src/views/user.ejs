@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <%- include('dashboarch.ejs') %>
+
+    <div class="content">
+
+        <form action="/user" method="get">
+            <button style="margin: 6px 0; cursor: pointer; border-radius: 4px;" type="submit" class="btn btn-add-category">
+                <h2 style="padding: 6px;">Add User</h2>
+            </button>
+        </form>
+
+        <div style="height: 10px;"></div>
+
+        <table>
+            <tr>
+                <td>Id</td>
+                <td>User Name</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

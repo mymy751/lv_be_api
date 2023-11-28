@@ -1,0 +1,137 @@
+html, body{
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;  
+    list-style: none;
+}
+button, input{
+    /* outline: none;
+    border: none; */
+}
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 8px 14px;
+  margin: 6px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+input[type=submit]{
+  width: auto;
+  padding: 4px;
+  margin: 10px 0;
+}
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+form {
+  /* border: 3px solid #f1f1f1; */
+  /* margin: auto;
+  width: 150px;
+  background-color: #04AA6D;
+  /* padding: auto; */
+  /* box-shadow: 10px 10px 10px 0px #888888;; */
+  /* border-radius: 5 */ 
+}
+
+.con-login form {
+  border: 3px solid #f1f1f1; 
+  margin: auto;
+  width: 350px;
+  background-color: #04AA6D;
+  padding: 12px;
+  box-shadow: 10px 10px 10px 0px #888888;;
+  border-radius: 5
+}
+form h2{
+  padding: 10px;
+  text-align: center;
+}
+
+
+.login{
+  text-align: center;
+}
+
+.login a:hover{
+  color: white;
+}
+button:hover{
+    background-color: #4CAF50;
+    color: white;
+}
+button a:hover {
+    text-decoration: none;
+    color: white;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.container{
+  margin: 60px;
+}
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 10px;
+    height: 1000px;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+}

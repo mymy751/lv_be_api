@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboarch</title>
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <a id="product" href="/product">Product Management</a>
+        <a id="user" href="/user">User Management</a>
+        <a id="category" href="/category">Category Management</a>
+        <a id="cart" href="/cart">Cart Management</a>
+        <a id="custom-order" href="/custom-order">Custom Order Management</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('.sidebar a');
+
+        links.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Xóa class "active" từ tất cả các liên kết
+                links.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+
+                // Thêm class "active" vào liên kết được nhấp
+                this.classList.add('active');
+
+                // Lưu trạng thái vào localStorage
+                localStorage.setItem('activeLink', this.id);
+
+                // Điều hướng đến trang được liên kết
+                window.location.href = this.href;
+            });
+        });
+
+        // Kiểm tra localStorage để xác định liên kết kích hoạt
+        const activeLinkId = localStorage.getItem('activeLink');
+        if (activeLinkId) {
+            const activeLink = document.getElementById(activeLinkId);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+    });
+</script>
+</body>
+</html>
